@@ -17,7 +17,7 @@ The easiest method is to install direct from this GitHub repository using:
 
 ```
 library(devtools)
-install_github("datasciencecampus/trendr")
+install_github("datasciencecampus/trendr/trendr")
 ```
 
 Otherwise, you can pull this repository and install locally using:
@@ -71,10 +71,21 @@ trendr(
   df,
   value.colname,
   time.colname,
+  output.save
   output.dir,
   output.file,
   output.plot
 )
+```
+
+We have also included two lighweight functions `trendr_mu` and `trendr_beta` to calculate the trend and first derivative, respectively. 
+
+```{r}
+trendr_mu(seq)
+```
+
+```{r}
+trendr_beta(seq)
 ```
 
 ## Examples
