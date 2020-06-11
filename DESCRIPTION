@@ -10,6 +10,8 @@ Authors@R: c(
   person("Kaveh", "Jahanshahi", email = "kaveh.jahanshahi@ons.gov.uk",
   role = c("ctb"))
   )
+Author: Sonia Mazzi [aut, cre], Michael Hodge [ctb], Kaveh Jahanshahi [ctb]
+Maintainer: Sonia Mazzi <sonia.mazzi@ons.gov.uk>
 URL: https://github.com/datasciencecampus/trendr
 BugReports: https://github.com/datasciencecampus/trendr/issues
 License: OGL (>= 3)
