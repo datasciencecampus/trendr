@@ -1,0 +1,13 @@
+- title: Locally-linear state-space model.
+  text: |
+        Fit a locally-linear state-space model (LLM-SSM) to time series data.
+  align: left
+
+- title: Lightweight R package.
+  text: |
+        Very lightweight R package designed to analyse time series data.
+
+- title: Uses a Diffuse Kalman Filter.
+  text: |
+        This tool uses a Diffuse Kalman Filter meaning parameters are estimated for you to best fit your data.
+
