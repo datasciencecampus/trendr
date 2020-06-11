@@ -1,0 +1,27 @@
+---
+title: "randomData"
+author: "Michael Hodge"
+date: "`r Sys.Date()`"
+---
+
+The data contained in the trendr R package was analyzed exactly like detailed in this document. randomData is a time series of increasing random numbers with a peak.
+
+First, because the data is contained in a package, we can easily call it from R
+
+
+```{r}
+library(trendr)
+head(randomData)
+```
+
+Run trendr on the data and produce a simple plot.
+
+```{r}
+trendr(df = randomData,
+        value.colname = 'value',
+        time.colname = 'date',
+        output.dir = '', 
+        output.file = 'randomData.csv',
+        output.plot = T)
+```
+

@@ -1,0 +1,26 @@
+---
+title: "japanGDPData"
+author: "Michael Hodge"
+date: "`r Sys.Date()`"
+---
+
+The data contained in the trendr R package was analyzed exactly like detailed in this document. japanGDPData [is a subset of the World Banks Gross Domestic Product (GDP) data set for 1960 to 2018](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?end=2018&locations=JP)
+
+First, because the data is contained in a package, we can easily call it from R
+
+
+```{r}
+library(trendr)
+head(japanGDPData)
+```
+
+Run trendr on the data and produce a simple plot.
+
+```{r}
+trendr(df = japanGDPData,
+        value.colname = 'value',
+        time.colname = 'year',
+        output.dir = '', 
+        output.file = 'japanGDPData.csv',
+        output.plot = T)
+```

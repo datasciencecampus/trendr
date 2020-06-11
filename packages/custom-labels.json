@@ -1,0 +1,18 @@
+[
+  { "name": "bug", "color": "#fc2929" },
+  { "name": "duplicate", "color": "#cccccc" },
+  { "name": "enhancement", "color": "#84b6eb" },
+  { "name": "help wanted", "color": "#159818" },
+  { "name": "invalid", "color": "#e6e6e6" },
+  { "name": "question", "color": "#cc317c" },
+  { "name": "wontfix", "color": "#ffffff" },
+  { "name": "Low", "color": "#009800" },
+  { "name": "Medium", "color": "#fbca04" },
+  { "name": "High", "color": "#eb6420" },
+  { "name": "Critical", "color": "#e11d21" },
+  { "name": "Legal!", "color": "#c60002" },
+  { "name": "Data!", "color": "#de0000" },
+  { "name": "Engagement!", "color": "#800000" },
+  { "name": "Resource!", "color": "#ae0003" },
+  { "name": "Tech!", "color": "#970002" }
+]
