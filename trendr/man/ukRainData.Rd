@@ -4,7 +4,7 @@
 \name{ukRainData}
 \alias{ukRainData}
 \title{Loads UK rainfall data set}
-\format{A data frame with 33 rows and 4 variables:
+\format{A data frame with 33 rows and 4 columns:
 \describe{
   \item{year}{The year.}
   \item{rain_year}{The average monthly rainfall in mm.}
@@ -15,6 +15,6 @@
 ukRainData
 }
 \description{
-A subset of DEFRA's UK rainfall data for 1980 to 2012
+A subset of DEFRA's UK rainfall data from 1980 to 2012
 }
 \keyword{datasets}

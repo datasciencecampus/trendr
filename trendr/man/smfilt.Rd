@@ -2,15 +2,15 @@
 % Please edit documentation in R/smfilter.R
 \name{smfilt}
 \alias{smfilt}
-\title{This is the smoothing filter. Relies on DFK calculated first.}
+\title{This is the smoothing filter. The DFK must be run first.}
 \usage{
 smfilt(dkf.out)
 }
 \arguments{
-\item{dkf.out}{The values as a vector}
+\item{dkf.out}{A list (output of the DKF)}
 }
 \description{
-This is the smoothing filter. Relies on DFK calculated first.
+This is the smoothing filter. The DFK must be run first.
 }
 \author{
 Sonia Mazzi

@@ -13,6 +13,6 @@
 randomData
 }
 \description{
-A data set a random exponential increase and plateau
+A random data set
 }
 \keyword{datasets}

@@ -4,7 +4,7 @@
 \name{japanGDPData}
 \alias{japanGDPData}
 \title{Loads Japan Gross Domestic Product (GDP) data set}
-\format{A data frame with 59 rows and 2 variables:
+\format{A data frame with 59 rows and 2 columns:
 \describe{
   \item{year}{The year.}
   \item{value}{The GDP value.}
@@ -13,6 +13,6 @@
 japanGDPData
 }
 \description{
-A subset of the World Banks Gross Domestic Product (GDP) data set for 1960 to 2018
+A subset of the World Banks Gross Domestic Product (GDP) data set from 1960 to 2018
 }
 \keyword{datasets}

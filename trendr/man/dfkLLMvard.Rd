@@ -2,14 +2,14 @@
 % Please edit documentation in R/dkfLLMvard.R
 \name{dfkLLMvard}
 \alias{dfkLLMvard}
-\title{Calculates the Dynamic Kalman Filter (DFK).}
+\title{Runs the Diffuse Kalman Filter (DFK).}
 \usage{
 dfkLLMvard(x, y)
 }
 \arguments{
-\item{x}{The values as a xtor}
+\item{x}{A vector with values of hyperparameters}
 
-\item{y}{The timeseries}
+\item{y}{A vector with the values of the time series}
 }
 \description{
 The state space form is

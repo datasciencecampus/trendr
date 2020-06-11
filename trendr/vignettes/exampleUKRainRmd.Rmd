@@ -1,0 +1,52 @@
+---
+author: "Michael Hodge"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{UK rainfall data}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+The data contained in the trendr R package was analyzed exactly like detailed in this document. ukRainData [is a subset of DEFRA's uk rainfall data for 1980 to 2012](http://data.defra.gov.uk/statistics_2015/env/water/uk_rain_2014.csv)
+
+First, because the data is contained in a package, we can easily call it from R
+
+
+```{r}
+library(knitr)
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+
+library(trendr)
+library(readr)
+library(dplyr)
+
+head(ukRainData)
+```
+
+Run trendr on the data and save the results as a variable. Three new columns are added to the data: trend, first_derivative and timeseries.
+
+```{r}
+out <- trendr::trendr(df = ukRainData,
+        value.colname = 'rain_year',
+        time.colname = 'year')
+out
+```
+
+Run trendr on the data and save the results to disk. Three new columns are added to the data: trend, first_derivative and timeseries.
+
+```{r}
+trendr::trendr(df = ukRainData,
+        value.colname = 'rain_year',
+        time.colname = 'year',
+        output.save = TRUE)
+```
+
+Run trendr on the data and plot the results to a graph.
+
+```{r}
+trendr::trendr(df = ukRainData,
+        value.colname = 'rain_year',
+        time.colname = 'year',
+        output.plot = TRUE)
+```

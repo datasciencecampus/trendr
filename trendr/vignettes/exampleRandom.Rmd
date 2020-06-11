@@ -1,0 +1,53 @@
+---
+author: "Michael Hodge"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteDepends{knitr,readr,dplyr}
+  %\VignetteIndexEntry{random data}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+The data contained in the trendr R package was analyzed exactly like detailed in this document. randomData is a time series of increasing random numbers with a peak.
+
+First, because the data is contained in a package, we can easily call it from R
+
+
+```{r}
+library(knitr)
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+
+library(trendr)
+library(readr)
+library(dplyr)
+
+head(randomData)
+```
+
+Run trendr on the data and save the results as a variable. Three new columns are added to the data: trend, first_derivative and timeseries.
+
+```{r}
+out <- trendr::trendr(df = randomData,
+        value.colname = 'value',
+        time.colname = 'date')
+out
+```
+
+Run trendr on the data and save the results to disk. Three new columns are added to the data: trend, first_derivative and timeseries.
+
+```{r}
+trendr::trendr(df = randomData,
+        value.colname = 'value',
+        time.colname = 'date',
+        output.save = TRUE)
+```
+
+Run trendr on the data and plot the results to a graph.
+
+```{r}
+trendr::trendr(df = randomData,
+        value.colname = 'value',
+        time.colname = 'date',
+        output.plot = TRUE)
+```

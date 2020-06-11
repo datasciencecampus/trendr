@@ -1,4 +1,4 @@
-##' Calculates the first derivative using a local linear model 
+##' Calculates the trend and first derivative using a local linear model 
 ##'
 ##' Calculates the trend and first derivative using a local linear model. Also uses a Kalman
 ##' Filter.
@@ -7,11 +7,8 @@
 ##' 
 ##' @author Michael Hodge
 ##' @export
-trendr_beta <- function(y) {
-  
-  suppressMessages(library(readr))
-  suppressMessages(library(dplyr))
-  
+trendr_mu <- function(y) {
+
   time <- seq(1,length(y))
   
   # Suppress readr read_csv message 
@@ -19,11 +16,11 @@ trendr_beta <- function(y) {
   
   earliest_timeseries_value <- time[1]
   latest_timeseries_value <- time[length(time)]
- 
+  
   #Hyperparameter estimation
   x0 <- c(1,1,1,1)
-
-  min_out_values <- nlminb(start = x0, likelihoodLLMcard, y = y,
+  
+  min_out_values <- nlminb(start = x0, likelihoodLLMvard, y = y,
                            lower = c(-Inf, -Inf, 0.85, -Inf), 
                            upper = c(0.5, 0.5, 1, 0.5))$par
   
@@ -36,9 +33,9 @@ trendr_beta <- function(y) {
   # Alpha is the predicted state vector
   alpha <- sm_out_values$alpha
   
-  beta <- alpha[2,]
-
-  return(beta)
+  mu <- alpha[1,]
+  
+  return(mu)
 }
                      
                          

@@ -4,6 +4,7 @@
 ##' @param df The data frame with a time series
 ##' @param value.colname The name of the column with the values of the series
 ##' @param time.colname The name of the column with the time values
+##' @param output.save Whether the results should save locally or now (default is FALSE)
 ##' @param output.dir The directory for the output file, by default your working directory
 ##' @param output.file The file name for the output file, by default out.csv
 ##' @param output.plot Specify whether you want the output to be plotted using R's basic plotting
@@ -21,13 +22,22 @@
 trendr <- function(df = randomData,
                      value.colname = "value",
                      time.colname = "date",
+                     output.save = FALSE,
                      output.dir = "./",
                      output.file = "out.csv",
                      output.plot = FALSE) {
   
-  date <- get('df')[time.colname][[1]]
+
+  `%>%` <- magrittr::`%>%`
+  
+  # Suppress readr read_csv message 
+  options(readr.num_columns = 0)
+  
+  earliest_timeseries_value <- get('df')[time.colname][[1]][1]
+  latest_timeseries_value <- get('df')[time.colname][[1]][nrow(df)]
   
   y <- get('df')[value.colname][[1]]
+  time <- get('df')[time.colname][[1]]
   
   #Hyperparameter estimation
   x0 <- c(1,1,1)
@@ -55,51 +65,50 @@ trendr <- function(df = randomData,
   
   # Put data together in a data frame
 
-  if (grepl('/', earliest_timeseries_value) == TRUE) {
-    df_ <- tibble(mu, beta, time) %>% 
-      mutate(timeseries = seq(as.Date(earliest_timeseries_value, format='%d/%m/%Y'), as.Date(latest_timeseries_value, format='%d/%m/%Y'), by='day')) %>% 
-      mutate(count = y)
+  if (grepl('-', earliest_timeseries_value) == TRUE) {
+    df_ <- dplyr::tibble(mu, beta, time) %>% 
+      dplyr::mutate(timeseries = seq(as.Date(earliest_timeseries_value, format='%Y-%m-%d'), as.Date(latest_timeseries_value, format='%Y-%m-%d'), by='day')) %>% 
+      dplyr::mutate(count = y)
   } else {
-    df_ <- tibble(mu, beta, time) %>% 
-      mutate(timeseries = time) %>% 
-      mutate(count = y)
+    df_ <- dplyr::tibble(mu, beta, time) %>% 
+      dplyr::mutate(timeseries = time) %>% 
+      dplyr::mutate(count = y)
   }
   
   # Tidy up dataframe
   df_calc <- df_ %>% 
-    select(trend = mu, first_derivative = beta)
+    dplyr::select(trend = mu, first_derivative = beta, timeseries = timeseries)
   
   df_out <- cbind(df,df_calc)
+  # Write to output directory
+  if (output.save == TRUE) {
+    write.csv(df_out, paste0(output.dir,output.file))
+  }
   
-  if (!missing(output.dir)) {
+  # Plot output
+  if (output.plot ==  T) {
+    
+    timeseries <- df_out$timeseries
 
-    # Write to output directory
-    write_csv(df_out, paste0(output.dir,output.file))
+    values <- get('df_out')[value.colname][[1]]
+
+    trend <- df_out$trend
+    first_der <- df_out$first_derivative
+    
+    par(mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
+    plot(timeseries, values, type="l", xlab=time.colname,
+         ylab=value.colname, ylim=c(min(first_der), max(values)))
+    lines(timeseries, trend, col='red')
+    par(new = T)
+    plot(timeseries, first_der, col='blue', type = "l", xaxt = "n", yaxt = "n",
+              ylab = "", xlab = "")
+    axis(side = 4)
+    mtext("first derivative", side = 4, line = 3)
+    legend("bottomright", c("raw", "trend", "first der"),
+               col = c("black", "red", "blue"), lty = c(1,1,1), inset=c(0,1), xpd=TRUE, horiz=TRUE, bty="n")
+    
+  }
   
-  
-      
-    # Plot output
-    if (output.plot ==  T) {
-      
-      timeseries <- df_out$timeseries
-      observed_count <- df_out$observed_count
-      trend <- df_out$trend
-      first_der <- df_out$first_derivative
-      
-      par(mar=c(5.1, 4.1, 4.1, 8.1), xpd=TRUE)
-      plot(timeseries, observed_count, type="l", xlab=time.colname,
-           ylab=value.colname, ylim=c(min(first_der), max(observed_count)))
-      lines(timeseries, trend, col='red')
-      par(new = T)
-      plot(timeseries, first_der, col='blue', type = "l", xaxt = "n", yaxt = "n",
-                ylab = "", xlab = "")
-      axis(side = 4)
-      mtext("first derivative", side = 4, line = 3)
-      legend("bottomright", c("raw", "trend", "first der"),
-                 col = c("black", "red", "blue"), lty = c(1,1,1), inset=c(0,1), xpd=TRUE, horiz=TRUE, bty="n")
-      
-    }
-  } 
   return(df_out)
 }
                      

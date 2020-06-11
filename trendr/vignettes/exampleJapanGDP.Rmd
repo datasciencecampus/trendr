@@ -1,0 +1,52 @@
+---
+author: "Michael Hodge"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteIndexEntry{random data}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+The data contained in the trendr R package was analyzed exactly like detailed in this document. japanGDPData [is a subset of the World Banks Gross Domestic Product (GDP) data set for 1960 to 2018](https://data.worldbank.org/indicator/NY.GDP.MKTP.CD?end=2018&locations=JP)
+
+First, because the data is contained in a package, we can easily call it from R
+
+
+```{r, include = FALSE}
+library(knitr)
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+
+library(readr)
+library(dplyr)
+library(trendr)
+
+head(japanGDPData)
+```
+
+Run trendr on the data and save the results as a variable. Three new columns are added to the data: trend, first_derivative and timeseries.
+
+```{r}
+out <- trendr::trendr(df = japanGDPData,
+        value.colname = 'value',
+        time.colname = 'year')
+out
+```
+
+Run trendr on the data and save the results to disk. Three new columns are added to the data: trend, first_derivative and timeseries.
+
+```{r}
+trendr::trendr(df = japanGDPData,
+        value.colname = 'value',
+        time.colname = 'year',
+        output.save = TRUE)
+```
+
+Run trendr on the data and plot the results to a graph.
+
+```{r}
+trendr::trendr(df = japanGDPData,
+        value.colname = 'value',
+        time.colname = 'year',
+        output.plot = TRUE)
+```

@@ -1,0 +1,38 @@
+---
+author: "Michael Hodge"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteEngine{knitr::knitr}
+  %\VignetteDepends{knitr,readr,dplyr}
+  %\VignetteIndexEntry{random data}
+  %\usepackage[UTF-8]{inputenc}
+---
+
+The data contained in the trendr R package was analyzed exactly like detailed in this document. randomData is a time series of increasing random numbers with a peak.
+
+The main function `trendr` also for both mu (trend) and beta (first derivative) to be calculated from a dataframe. However, sometimes the user may want to calculate either from a series of values. This is what `trendr_mu` and `trendr_beta` can be used for.
+
+
+```{r}
+library(knitr)
+knitr::opts_chunk$set(collapse = T, comment = "#>")
+
+library(trendr)
+library(readr)
+library(dplyr)
+
+head(randomData)
+```
+
+For mu.
+
+```{r}
+trendr::trendr_mu(randomData$value)
+```
+
+For beta.
+
+```{r}
+trendr::trendr_beta(randomData$value)
+```
